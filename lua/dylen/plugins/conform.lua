@@ -1,4 +1,5 @@
--- Starting point for a plugin spec.
+-- TODO: Either disable this plugin or find a way to make sure undo's
+-- work beyond last formatting change.
 return {
   { -- Autoformat
     'stevearc/conform.nvim',

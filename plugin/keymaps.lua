@@ -30,7 +30,7 @@ set('n', 'k', function(...)
 end, { expr = true })
 
 -- Disable arrow keys in normal mode.
--- I don't disable L/R -- use to navigate between tabs.
+--   I don't disable L/R -- use to navigate between tabs.
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
@@ -46,14 +46,12 @@ set('n', '<c-l>', '<c-w><c-l>')
 set('n', '<c-h>', '<c-w><c-h>')
 
 -- These mappings control the size of splits (height/width)
-set('n', '<M-,>', '<c-w>5<')
-set('n', '<M-.>', '<c-w>5>')
-set('n', '<M-t>', '<c-w>+')
-set('n', '<M-s>', '<c-w>-')
-set('n', '<c-up>', '<c-w><c-+>', { desc = 'Increase window height' })
-set('n', '<c-down>', '<c-w><c-->', { desc = 'Decrease window height' })
-set('n', '<c-right>', '<c-w><c->>', { desc = 'Increase window width' })
-set('n', '<c-left>', '<c-w><c-<>', { desc = 'Decrease window width' })
+--   Normally these are not good mappings, but I have space cadet remappings
+--   on all of my devices, so managing splits is quite easy this way.
+set('n', '<c-right>', '<c-w>5>', { desc = 'Increase window width' })
+set('n', '<c-left>', '<c-w>5<', { desc = 'Decrease window width' })
+set('n', '<c-up>', '<c-w>+', { desc = 'Increase window height' })
+set('n', '<c-down>', '<c-w>-', { desc = 'Decrease window height' })
 
 -- Keybinds to make tab navigation easier.
 --   Normally these are not good mappings, but I have space cadet remappings
@@ -90,10 +88,7 @@ set('n', '[d', fn(vim.diagnostic.jump, { count = -1, float = true, desc = 'Go to
 -- or just use <c-\><c-n> to exit terminal mode
 set('t', '<Esc><Esc>', '<c-\\><c-n>', { desc = 'Exit terminal mode' })
 
--- Not sure what these do; something related to linewise vertical alt (<M-key>)
--- navigation.
---
--- I think they are for viewing git changes effectively.
+-- Swap lines easily by adding alt modifier to vertical navigation.
 set('n', '<M-j>', function()
   if vim.opt.diff:get() then
     vim.cmd [[normal! ]c]]

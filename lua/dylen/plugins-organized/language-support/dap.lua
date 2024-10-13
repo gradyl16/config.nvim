@@ -7,21 +7,14 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
-    'rcarriga/nvim-dap-ui',
-
-    -- Required dependency for nvim-dap-ui
-    'nvim-neotest/nvim-nio',
-
-    -- Installs the debug adapters for you
-    'williamboman/mason.nvim',
+    'rcarriga/nvim-dap-ui', -- Creates a beautiful debugger UI
+    'nvim-neotest/nvim-nio', -- Required dependency for nvim-dap-ui
+    'williamboman/mason.nvim', -- Installs the debug adapters for you
     'jay-babu/mason-nvim-dap.nvim',
 
-    -- Add your own debuggers here
+    -- Add language-specific debugging plugins below
     'leoluz/nvim-dap-go',
   },
   config = function()
@@ -45,7 +38,7 @@ return {
       },
     }
 
-    -- Basic debugging keymaps, feel free to change to your liking!
+    -- Basic debugging keymaps
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })

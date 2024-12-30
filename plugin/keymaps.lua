@@ -1,10 +1,10 @@
---  See `:help vim.keymap.set()`
+--  See `:help set()`
 local set = vim.keymap.set
 local k = vim.keycode
 local f = require 'dylen.f'
 local fn = f.fn
 
--- [[ Navigation Keymaps ]]
+-- [[ Navigation ]]
 --
 -- Keybinds to make navigation with multilevel bodies of text that only
 -- consume one line easier.
@@ -31,8 +31,8 @@ end, { expr = true })
 
 -- Disable arrow keys in normal mode.
 --   I don't disable L/R -- use to navigate between tabs.
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
@@ -73,7 +73,7 @@ end, { expr = true })
 
 -- Diagnostics
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- There are builtin keymaps for this now, but I like that it shows
 -- the float when I navigate to the error - so I override them.
@@ -117,3 +117,56 @@ set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current
 set('n', '<leader>o', function()
   vim.fn.jobstart({ 'tatum', 'serve', '--open', vim.fn.expand '%' }, { noremap = true, silent = true })
 end)
+
+-- Persistence
+--
+-- load the session for the current directory
+set('n', '<leader>qs', function() require('persistence').load() end)
+
+-- select a session to load
+set('n', '<leader>qS', function() require('persistence').select() end)
+
+-- load the last session
+set('n', '<leader>ql', function() require('persistence').load({ last = true }) end)
+
+-- stop Persistence => session won't be saved on exit
+set('n', '<leader>qd', function() require('persistence').stop() end)
+
+-- CodeSnap
+--
+-- save the selected visual block
+set({'v', 'x'}, '<leader>css', function() require('codesnap').save_snapshot() end)
+
+-- Molten
+--
+-- Initialize the Jupyter kernel
+set("n", "<localleader>ip", function()
+  local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+  if venv ~= nil then
+    -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+    venv = string.match(venv, "/.+/(.+)")
+    vim.cmd(("MoltenInit %s"):format(venv))
+  else
+    vim.cmd("MoltenInit python3")
+  end
+end, { desc = "Initialize Molten for python3", silent = true })
+set("n", "<localleader>mi", ":MoltenInit<CR>",
+    { silent = true, desc = "Initialize the plugin" })
+
+-- Evaluation
+set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
+    { silent = true, desc = "run operator selection" })
+set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
+    { silent = true, desc = "evaluate line" })
+set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
+    { silent = true, desc = "re-evaluate cell" })
+set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
+    { silent = true, desc = "evaluate visual selection" })
+
+-- Rust tools
+--
+-- Hover actions
+-- vim.keymap.set('n', '<C-space>', require('rust-tools').hover_actions.hover_actions)
+-- Code action groups
+-- vim.keymap.set('n', '<Leader>a', require('rust-tools').code_action_group.code_action_group)
+

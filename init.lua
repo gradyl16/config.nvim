@@ -27,6 +27,8 @@ vim.g.mapleader = ' ' -- See `:help mapleader`
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
+vim.g.python3_host_prog=vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
+
 -- Setup lazy.nvim
 require('lazy').setup({ import = 'dylen/plugins' }, {
   -- Configure any other settings here. See the documentation for more details.

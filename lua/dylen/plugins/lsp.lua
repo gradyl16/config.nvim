@@ -150,17 +150,13 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {
-          cmd = {
-            'clangd',
-            -- '--compile-commands-dir=/home/asclepius/school/uiuc/classes/cs423-osd/mp/mp0/linux-5.15.165/',
-            -- '--compile-commands-dir=/home/asclepius/school/uiuc/classes/cs423-osd/mp/mp1-gradyl16/',
-          },
+          format = { enable = true },
         },
         gopls = {
           -- directoryFilters = { '/home/asclepius/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20/' },
         },
         pyright = {},
-        rust_analyzer = {},
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:

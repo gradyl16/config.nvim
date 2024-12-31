@@ -1,3 +1,4 @@
+-- Open dbee in its own "pseudo" tab page
 vim.keymap.set("n", "<space>od", function()
   require("dbee").open()
 end)

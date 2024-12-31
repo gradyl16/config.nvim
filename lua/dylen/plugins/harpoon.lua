@@ -1,3 +1,6 @@
+-- Neat plugin that helps manage a small amount of files with high efficiency.
+-- See ThePrimeagen's YT channel for more vim stuff.
+
 return {
   {
     'ThePrimeagen/harpoon',
@@ -5,61 +8,74 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = function()
       local harpoon = require 'harpoon'
-      -- REQUIRED
       harpoon:setup {}
-      -- REQUIRED
 
-      vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():add()
-      end)
-      vim.keymap.set('n', '<C-e>', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end)
+      local wk = require 'which-key'
 
-      vim.keymap.set('n', '<C-h>', function()
-        harpoon:list():select(1)
-      end)
-      vim.keymap.set('n', '<C-t>', function()
-        harpoon:list():select(2)
-      end)
-      vim.keymap.set('n', '<C-n>', function()
-        harpoon:list():select(3)
-      end)
-      vim.keymap.set('n', '<C-s>', function()
-        harpoon:list():select(4)
-      end)
+      wk.add {
+        { '<leader>H', group = 'Harpoon' }, -- Harpoon group
+        {
+          '<leader>Ha',
+          function()
+            harpoon:list():add()
+          end,
+          desc = '[H]arpoon [a]dd current file',
+        },
+        {
+          '<leader>Hd',
+          function()
+            harpoon:list():remove()
+          end,
+          desc = '[H]arpoon [d]elete current file',
+        },
 
-      -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set('n', '<C-S-P>', function()
-        harpoon:list():prev()
-      end)
-      vim.keymap.set('n', '<C-S-N>', function()
-        harpoon:list():next()
-      end)
+        -- Quick picks
+        {
+          '<C-t>',
+          function()
+            harpoon:list():select(1)
+          end,
+          desc = 'Harpoon toggle quick pick 1',
+        },
 
-      -- basic telescope configuration
-      local conf = require('telescope.config').values
-      local function toggle_telescope(harpoon_files)
-        local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-          table.insert(file_paths, item.value)
-        end
+        -- Toggle previous & next buffers stored within Harpoon list
+        {
+          '<C-p>',
+          function()
+            harpoon:list():prev()
+          end,
+          desc = 'Harpoon previous buffer',
+        },
+        {
+          '<C-n>',
+          function()
+            harpoon:list():next()
+          end,
+          desc = 'Harpoon next buffer',
+        },
 
-        require('telescope.pickers')
-          .new({}, {
-            prompt_title = 'Harpoon',
-            finder = require('telescope.finders').new_table {
-              results = file_paths,
-            },
-            previewer = conf.file_previewer {},
-            sorter = conf.generic_sorter {},
-          })
-          :find()
-      end
+        -- Telescope integration
+        {
+          '<C-e>',
+          function()
+            local conf = require('telescope.config').values
+            local file_paths = {}
+            for _, item in ipairs(harpoon:list().items) do
+              table.insert(file_paths, item.value)
+            end
 
-      vim.keymap.set('n', '<C-e>', function()
-        toggle_telescope(harpoon:list())
-      end, { desc = 'Open harpoon window' })
+            require('telescope.pickers')
+              .new({}, {
+                prompt_title = 'Harpoon',
+                finder = require('telescope.finders').new_table { results = file_paths },
+                previewer = conf.file_previewer {},
+                sorter = conf.generic_sorter {},
+              })
+              :find()
+          end,
+          desc = 'Open Harpoon menu',
+        },
+      }
     end,
   },
 }

@@ -24,6 +24,8 @@ python3 -m venv .virtualenvs/neovim
 [!important]
 Some plugins require authentication for use (e.g., Github Copilot). You will need to set up the necessary credentials for these plugins to work.
 
+Some of my plugins aren't functional, even on my machines; I'm keeping them around for when I configure them properly.
+
 I have a few plugins that serve the same purpose. This makes the config a bit bloated. Please choose among them unless you need/want both (i.e., you are a weirdo like me :p).
 
 ---

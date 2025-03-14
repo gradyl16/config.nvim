@@ -1,5 +1,8 @@
+-- tresitter.lua
+--
+-- Treesitter support plugins. Highlight, edit, and navigate code.
 return {
-  { -- Highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
@@ -18,7 +21,7 @@ return {
         enable = true,
         -- NOTE: Default maps listed below for convenience.
         --
-        -- keymaps = {
+       -- keymaps = {
         --   init_selection = 'gnn',
         --   node_incremental = 'grn',
         --   scope_incremental = 'grc',

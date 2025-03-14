@@ -5,7 +5,10 @@ local f = require 'dylen.f'
 local fn = f.fn
 
 -- [[ Navigation ]]
---
+-- Session ending quality of life keybinds.
+set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[Q]uit current buffer' })
+set('n', '<leader>Q', '<cmd>qall<CR>', { desc = '[Q]uit all buffers' })
+
 -- Keybinds to make navigation with multilevel bodies of text that only
 -- consume one line easier.
 --   Use <hjkl> for all single level navigation.
@@ -108,8 +111,8 @@ end)
 -- [[ Code Keymaps ]]
 --
 -- Code execution quality of life
-set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
-set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
+-- set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+-- set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Execute the current file' })
 
 -- [[ Plugin Keymaps ]]
 --
@@ -136,32 +139,6 @@ set('n', '<leader>qd', function() require('persistence').stop() end)
 --
 -- save the selected visual block
 set({'v', 'x'}, '<leader>css', function() require('codesnap').save_snapshot() end)
-
--- Molten
---
--- Initialize the Jupyter kernel
-set("n", "<localleader>ip", function()
-  local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
-  if venv ~= nil then
-    -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
-    venv = string.match(venv, "/.+/(.+)")
-    vim.cmd(("MoltenInit %s"):format(venv))
-  else
-    vim.cmd("MoltenInit python3")
-  end
-end, { desc = "Initialize Molten for python3", silent = true })
-set("n", "<localleader>mi", ":MoltenInit<CR>",
-    { silent = true, desc = "Initialize the plugin" })
-
--- Evaluation
-set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>",
-    { silent = true, desc = "run operator selection" })
-set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>",
-    { silent = true, desc = "evaluate line" })
-set("n", "<localleader>rr", ":MoltenReevaluateCell<CR>",
-    { silent = true, desc = "re-evaluate cell" })
-set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv",
-    { silent = true, desc = "evaluate visual selection" })
 
 -- Rust tools
 --

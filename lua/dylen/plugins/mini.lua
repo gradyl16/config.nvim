@@ -16,6 +16,9 @@ return {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.animate').setup()
+      require('mini.indentscope').setup()
+      require('mini.starter').setup()
 
       -- NOTE: Currently using lualine instead of mini.statusline.
       --

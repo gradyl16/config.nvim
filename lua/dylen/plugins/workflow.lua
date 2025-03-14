@@ -32,7 +32,7 @@ return {
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
       -- Open parent directory in floating window
-      vim.keymap.set('n', '<space>-', require('oil').toggle_float)
+      vim.keymap.set('n', '<space>oo', require('oil').toggle_float, { desc = '[O]pen [O]il floating window' })
     end,
   },
   { 'numToStr/Comment.nvim', opts = {} },
@@ -42,5 +42,10 @@ return {
   { 'tpope/vim-repeat' }, -- Extends `.` for plugin-related motions/commands
   { 'gpanders/nvim-parinfer' },
   { 'pocco81/auto-save.nvim' },
-  { 'LunarVim/bigfile.nvim' }, -- Disable certain features for large files (perf)
+  {
+    'LunarVim/bigfile.nvim',
+    opts = {
+      filesize = 0.75
+    }
+  }, -- Disable certain features for large files (perf)
 }

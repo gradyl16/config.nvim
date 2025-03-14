@@ -1,3 +1,7 @@
+-- language.lua
+--
+-- This file contains language-specific plugins and configurations.
+-- Considering refactoring these into separate plugins.
 return {
   { 'fatih/go.vim' }, -- Go LSP stuff; Must phase out
   {

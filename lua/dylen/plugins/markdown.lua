@@ -1,10 +1,14 @@
+-- markdown.lua
+--
+-- A collection of small plugins that provide markdown support.
 return {
-  { 'tadmccorkle/markdown.nvim', ft = 'markdown', opts = {} },
-  {
+  -- Useful tooling for navigating and editing markdown files.
+  -- I have it disabled because I haven't been using it.
+  --
+  -- { 'tadmccorkle/markdown.nvim', ft = 'markdown', opts = {} },
+  { -- A markdown previewer embedded directly into the working buffer.
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},

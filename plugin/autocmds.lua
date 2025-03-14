@@ -16,6 +16,7 @@ create_autocmd('TextYankPost', {
   end,
 })
 
+-- Automatically enter terminal insert mode when opening a terminal
 command 'autocmd TermOpen * startinsert'
 command 'autocmd TermOpen * setlocal nonumber norelativenumber'
 command 'autocmd FileType oil setlocal nonumber norelativenumber'

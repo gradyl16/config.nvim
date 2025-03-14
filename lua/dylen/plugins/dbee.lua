@@ -1,42 +1,41 @@
--- return {
---   {
---     'kndndrj/nvim-dbee',
---     dependencies = {
---       'MunifTanjim/nui.nvim',
---     },
---     build = function()
---       -- Install tries to automatically detect the install method.
---       -- if it fails, try calling it with one of these parameters:
---       --    "", "wget", "bitsadmin", "go"
---       require('dbee').install()
---     end,
---     config = function()
---       require('dbee').setup(--[[optional config]])
---     end,
---   },
--- }
+-- dbee.lua
 return {
-  {
-    "kndndrj/nvim-dbee",
-    dependencies = { "MunifTanjim/nui.nvim" },
+  { -- Database client
+    'kndndrj/nvim-dbee',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    keys = {
+      {
+        '<space>od',
+        function()
+          require('dbee').open()
+        end,
+      },
+      mode = 'n',
+      desc = 'Open Dbee',
+    },
     build = function()
-      require("dbee").install()
+      require('dbee').install()
     end,
     config = function()
-      local source = require "dbee.sources"
-      require("dbee").setup {
+      local source = require 'dbee.sources'
+      require('dbee').setup {
         sources = {
           source.MemorySource:new({
             ---@diagnostic disable-next-line: missing-fields
             {
-              type = "postgres",
-              name = "CT Measurement",
-              url = "postgresql://postgres:postgres@localhost:5432/ctdb",
+              type = 'postgres',
+              name = 'CT Measurement (Mixed)',
+              url = 'postgresql://postgres:postgres@localhost:5432/ctdb',
             },
-          }, "CT Measurement"),
+            {
+              type = 'postgres',
+              name = 'CT Measurement (Sabre)',
+              url = 'postgresql://postgres:postgres@localhost:5432/ctdb_sabre',
+            },
+          }, 'CT Measurement'),
         },
       }
-      require "dylen.dbee"
+      require 'dylen.dbee'
     end,
   },
 }

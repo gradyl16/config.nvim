@@ -1,6 +1,6 @@
--- TODO: Either disable format on save (in opts below) or disable autosave.
+-- conform.lua
 return {
-  { -- Autoformat
+  { -- Provides autoformatting capabilities.
     'stevearc/conform.nvim',
     lazy = false,
     keys = {

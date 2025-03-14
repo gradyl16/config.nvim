@@ -19,12 +19,12 @@ return {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -128,9 +128,12 @@ return {
           { name = 'luasnip' },
           {
             name = 'path',
+            -- NOTE: This is a silly workaround that almost certainly has an easier solution
+            -- cmp was crashing neovim since it was trying to enumerate a dir with many files
             option = {
               get_cwd = function()
-                local oversized_dir = '/home/asclepius/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20'
+                local home = os.getenv("HOME")
+                local oversized_dir = home .. '/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20'
                 local current_directory = vim.fn.getcwd()
                 if string.find(current_directory, oversized_dir) then
                   -- Return a dummy path or empty string to disable path completion

@@ -1,3 +1,8 @@
+-- Open dbee in its own "pseudo" tab page
+vim.keymap.set("n", "<space>od", function()
+  require("dbee").open()
+end)
+
 ---@diagnostic disable-next-line: param-type-mismatch
 local base = vim.fs.joinpath(vim.fn.stdpath "state", "dbee", "notes")
 local pattern = string.format("%s/.*", base)

@@ -1,4 +1,6 @@
 -- conform.lua
+-- NOTE: This plugin can be annoying if you have on autosave.
+-- Since I have autosave enabled, I have basically disabled this plugin.
 return {
   { -- Provides autoformatting capabilities.
     'stevearc/conform.nvim',

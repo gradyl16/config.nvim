@@ -89,13 +89,15 @@ return {
 
     -- Install TS/JS specific config
     -- setup adapters
-    require('dap-vscode-js').setup {
-      debugger_path = vim.fn.stdpath 'data' .. '/mason/packages/js-debug-adapter',
-      debugger_cmd = { 'js-debug-adapter' },
-      adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+    dap.adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'node',
+        args = { vim.fn.stdpath 'data' .. '/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js', '${port}' },
+      },
     }
-
-    local dap = require 'dap'
 
     -- custom adapter for running tasks before starting debug
     local custom_adapter = 'pwa-node-custom'
@@ -127,8 +129,19 @@ return {
           cwd = '${workspaceFolder}',
           sourceMaps = true,
           skipFiles = { '<node_internals>/**' },
+        },
+        {
+          name = 'Frida: Attach to Inspector',
+          type = 'pwa-node',
+          request = 'attach',
+          address = 'localhost',
+          port = 9229,
+          sourceMaps = true,
           protocol = 'inspector',
-          console = 'integratedTerminal',
+          skipFiles = { '<node_internals>/**', 'node_modules/**' },
+          remoteRoot = '${workspaceFolder}',
+          localRoot = '${workspaceFolder}',
+          outFiles = '${workspaceFolder}/dist/**/*.js',
         },
         {
           name = 'Attach to node process',

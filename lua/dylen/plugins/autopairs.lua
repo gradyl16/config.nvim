@@ -1,3 +1,5 @@
+-- autopairs.lua
+--
 -- autopairs is a delimiter (e.g., `>` for `<`, `]` for `[]`)
 -- autocompletion plugin.
 -- https://github.com/windwp/nvim-autopairs

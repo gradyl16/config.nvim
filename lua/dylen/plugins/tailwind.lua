@@ -1,4 +1,6 @@
 -- tailwind-tools.lua
+--
+-- Enable language support for Tailwind CSS.
 return {
   "luckasRanarison/tailwind-tools.nvim",
   name = "tailwind-tools",

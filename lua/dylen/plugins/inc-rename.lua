@@ -1,4 +1,7 @@
 -- inc-rename.lua
+--
+-- Shows visual progress when renaming symbols with LSP bindings.
+
 return {
   { -- Shows replacement with LSP rename
     'smjonas/inc-rename.nvim',

@@ -3,6 +3,7 @@
 -- Save sessions.
 -- Especially useful for me when I misconfigure something and
 -- have to kill neovim before the OOM killer does.
+
 return {
   {
     'folke/persistence.nvim',

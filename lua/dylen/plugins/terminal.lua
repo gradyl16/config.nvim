@@ -1,6 +1,9 @@
 -- terminal.lua
 --
 -- A collection of small plugins to improve terminal UX.
+-- Note that while this plugin is very helpful for neovim-centric workflows,
+-- utilizing a terminal mutliplexer will likely obsolete your need for this.
+
 return {
   { -- enables toggleable terminal (rather than one you must open and close)
     'akinsho/toggleterm.nvim',

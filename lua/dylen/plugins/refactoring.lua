@@ -1,3 +1,7 @@
+-- refactoring.lua
+--
+-- Provides facilities for efficiently refactoring code.
+
 return {
   {
     'ThePrimeagen/refactoring.nvim',

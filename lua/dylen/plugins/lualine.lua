@@ -1,9 +1,13 @@
+-- lualine.lua
+--
+-- A simple bufferline.
+
 return {
   {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
-        theme = vim.g.colors_name,
+        theme = 'dracula',
         refresh = {
           statusline = 1000,
         },

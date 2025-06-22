@@ -1,9 +1,9 @@
 -- render-markdown.lua
 --
--- A collection of small plugins that provide markdown support.
+ -- A markdown previewer embedded directly into the working buffer.
 
 return {
-  { -- A markdown previewer embedded directly into the working buffer.
+  {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     ---@module 'render-markdown'

@@ -32,7 +32,6 @@ return {
         { '<leader>d_', hidden = true },
         { '<leader>h', group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
-        { '<leader>m', group = '[M]olten' },
         { '<leader>m_', hidden = true },
         { '<leader>o', group = '[O]pen' },
         { '<leader>o_', hidden = true },

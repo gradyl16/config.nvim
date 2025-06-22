@@ -1,3 +1,5 @@
+-- harpoon.lua
+--
 -- Neat plugin that helps manage a small amount of files with high efficiency.
 -- See ThePrimeagen's YT channel for more vim stuff.
 

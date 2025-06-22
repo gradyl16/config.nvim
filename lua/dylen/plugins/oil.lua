@@ -1,4 +1,7 @@
--- TODO: Split this into separate files.
+-- oil.lua
+--
+-- Filesystem navigation utility that allows directory manipulation using standard buffer management.
+
 return {
   {
     'stevearc/oil.nvim',
@@ -35,17 +38,4 @@ return {
       vim.keymap.set('n', '<space>oo', require('oil').toggle_float, { desc = '[O]pen [O]il floating window' })
     end,
   },
-  { 'numToStr/Comment.nvim', opts = {} },
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-  { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-repeat' }, -- Extends `.` for plugin-related motions/commands
-  { 'gpanders/nvim-parinfer' },
-  { 'pocco81/auto-save.nvim' },
-  {
-    'LunarVim/bigfile.nvim',
-    opts = {
-      filesize = 0.75
-    }
-  }, -- Disable certain features for large files (perf)
 }

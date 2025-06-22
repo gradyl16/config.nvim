@@ -1,6 +1,7 @@
 -- conform.lua
+--
 -- NOTE: This plugin can be annoying if you have on autosave.
--- Since I have autosave enabled, I have basically disabled this plugin.
+-- Since I have autosave enabled, I do not format on save as it is too disruptive.
 return {
   { -- Provides autoformatting capabilities.
     'stevearc/conform.nvim',
@@ -30,6 +31,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         markdown = { 'prettier' },
+        vue = { 'prettier' }
 
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },

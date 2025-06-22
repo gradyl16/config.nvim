@@ -1,10 +1,6 @@
 -- dap.lua
 --
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+-- Configure interactive debugging capabilities
 
 return {
   'mfussenegger/nvim-dap',
@@ -118,84 +114,31 @@ return {
     end
 
     -- language config
-    for _, language in ipairs { 'typescript', 'javascript' } do
-      dap.configurations[language] = {
-        {
-          name = 'Launch',
-          type = 'pwa-node',
-          request = 'launch',
-          program = '${file}',
-          rootPath = '${workspaceFolder}',
-          cwd = '${workspaceFolder}',
-          sourceMaps = true,
-          skipFiles = { '<node_internals>/**' },
-        },
-        {
-          name = 'Frida: Attach to Inspector',
-          type = 'pwa-node',
-          request = 'attach',
-          address = 'localhost',
-          port = 9229,
-          sourceMaps = true,
-          protocol = 'inspector',
-          skipFiles = { '<node_internals>/**', 'node_modules/**' },
-          remoteRoot = '${workspaceFolder}',
-          localRoot = '${workspaceFolder}',
-          outFiles = '${workspaceFolder}/dist/**/*.js',
-        },
-        {
-          name = 'Attach to node process',
-          type = 'pwa-node',
-          request = 'attach',
-          rootPath = '${workspaceFolder}',
-          processId = require('dap.utils').pick_process,
-        },
-        {
-          name = 'Debug Main Process (Electron)',
-          type = 'pwa-node',
-          request = 'launch',
-          program = '${workspaceFolder}/node_modules/.bin/electron',
-          args = {
-            '${workspaceFolder}/dist/index.js',
-          },
-          outFiles = {
-            '${workspaceFolder}/dist/*.js',
-          },
-          resolveSourceMapLocations = {
-            '${workspaceFolder}/dist/**/*.js',
-            '${workspaceFolder}/dist/*.js',
-          },
-          rootPath = '${workspaceFolder}',
-          cwd = '${workspaceFolder}',
-          sourceMaps = true,
-          skipFiles = { '<node_internals>/**' },
-          protocol = 'inspector',
-          console = 'integratedTerminal',
-        },
-        {
-          name = 'Compile & Debug Main Process (Electron)',
-          type = custom_adapter,
-          request = 'launch',
-          preLaunchTask = 'npm run build-ts',
-          program = '${workspaceFolder}/node_modules/.bin/electron',
-          args = {
-            '${workspaceFolder}/dist/index.js',
-          },
-          outFiles = {
-            '${workspaceFolder}/dist/*.js',
-          },
-          resolveSourceMapLocations = {
-            '${workspaceFolder}/dist/**/*.js',
-            '${workspaceFolder}/dist/*.js',
-          },
-          rootPath = '${workspaceFolder}',
-          cwd = '${workspaceFolder}',
-          sourceMaps = true,
-          skipFiles = { '<node_internals>/**' },
-          protocol = 'inspector',
-          console = 'integratedTerminal',
-        },
-      }
-    end
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch with CWD-relative args',
+        program = '${file}',
+        args = function()
+          local cwd = vim.fn.getcwd()
+          local input = vim.fn.input 'Args (relative to CWD): '
+          local parts = vim.fn.split(input, ' ', true)
+
+          -- Prepend CWD to any relative path arguments
+          local full_args = {}
+          for _, part in ipairs(parts) do
+            if vim.fn.filereadable(part) == 1 or vim.fn.isdirectory(part) == 1 then
+              table.insert(full_args, cwd .. '/' .. part)
+            else
+              table.insert(full_args, part)
+            end
+          end
+
+          return full_args
+        end,
+        console = 'integratedTerminal',
+      },
+    }
   end,
 }

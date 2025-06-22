@@ -9,6 +9,7 @@ local fn = f.fn
 set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[Q]uit current buffer' })
 set('n', '<leader>Q', '<cmd>qall<CR>', { desc = '[Q]uit all buffers' })
 
+
 -- Keybinds to make navigation with multilevel bodies of text that only
 -- consume one line easier.
 --   Use <hjkl> for all single level navigation.

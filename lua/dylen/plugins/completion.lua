@@ -1,10 +1,15 @@
+-- completion.lua
+--
+-- Enables autocompletion
+
 return {
-  { -- Autocompletion
+  {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
+      { -- Icons for completion menu
+        'onsnails/lspkind.nvim' },
+      { -- Snippet Engine & its associated nvim-cmp source
         'L3MON4D3/LuaSnip',
         build = (function()
           -- Build Step is needed for regex support in snippets.
@@ -90,12 +95,6 @@ return {
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
 
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
@@ -128,22 +127,23 @@ return {
           { name = 'luasnip' },
           {
             name = 'path',
-            -- NOTE: This is a silly workaround that almost certainly has an easier solution
+            -- NOTE: Below is a silly workaround that almost certainly has an easier solution
+            --
             -- cmp was crashing neovim since it was trying to enumerate a dir with many files
-            option = {
-              get_cwd = function()
-                local home = os.getenv("HOME")
-                local oversized_dir = home .. '/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20'
-                local current_directory = vim.fn.getcwd()
-                if string.find(current_directory, oversized_dir) then
-                  -- Return a dummy path or empty string to disable path completion
-                  return '/dev/null'
-                else
-                  -- Return the actual working directory for normal completion
-                  return vim.fn.getcwd()
-                end
-              end,
-            },
+            -- option = {
+            --   get_cwd = function()
+            --     local home = os.getenv("HOME")
+            --     local oversized_dir = home .. '/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20'
+            --     local current_directory = vim.fn.getcwd()
+            --     if string.find(current_directory, oversized_dir) then
+            --       -- Return a dummy path or empty string to disable path completion
+            --       return '/dev/null'
+            --     else
+            --       -- Return the actual working directory for normal completion
+            --       return vim.fn.getcwd()
+            --     end
+            --   end,
+            -- },
           },
         },
       }

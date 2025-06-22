@@ -148,9 +148,7 @@ return {
         clangd = {
           format = { enable = true },
         },
-        gopls = {
-          -- directoryFilters = { '/home/asclepius/school/uiuc/classes/cs597-ct/json-data/entries/week_of_9-20/' },
-        },
+        gopls = {},
         pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -158,8 +156,8 @@ return {
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        -- But for many setups, the LSP (`typescript-language-server`) will work just fine
+        ts_ls = {},
         --
         lua_ls = {
           -- cmd = {...},
@@ -203,6 +201,8 @@ return {
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        automatic_enable = {},
+        ensure_installed = ensure_installed,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}

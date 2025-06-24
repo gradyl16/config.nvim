@@ -8,7 +8,8 @@ return {
     event = 'InsertEnter',
     dependencies = {
       { -- Icons for completion menu
-        'onsnails/lspkind.nvim' },
+        'onsails/lspkind.nvim',
+      },
       { -- Snippet Engine & its associated nvim-cmp source
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -63,10 +64,10 @@ return {
 
             -- The function below will be called before any actual modifications from lspkind
             -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function(entry, vim_item)
-              -- ...
-              return vim_item
-            end,
+            -- before = function(entry, vim_item)
+            --   -- ...
+            --   return vim_item
+            -- end,
           },
         },
         snippet = {
@@ -123,6 +124,10 @@ return {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
+          {
+            name = 'lazydev',
+            group_index = 0,
+          },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           {

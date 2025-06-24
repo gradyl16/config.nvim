@@ -25,15 +25,15 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 vim.g.mapleader = ' ' -- See `:help mapleader`
 vim.g.maplocalleader = ' '
-vim.g.have_nerd_font = true
 
+vim.g.have_nerd_font = true
 vim.g.python3_host_prog = vim.fn.expand '~/.virtualenvs/neovim/bin/python3'
 
 -- Setup lazy.nvim
 require('lazy').setup({ import = 'dylen/plugins' }, {
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { 'dracula-soft' } },
+  install = { colorscheme = { 'dracula' } },
   -- automatically check for plugin updates
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },

@@ -12,11 +12,10 @@ create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
 
 -- Automatically enter terminal insert mode when opening a terminal
-command 'autocmd TermOpen * startinsert'
 command 'autocmd TermOpen * setlocal nonumber norelativenumber'
 command 'autocmd FileType oil setlocal nonumber norelativenumber'

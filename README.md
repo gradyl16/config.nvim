@@ -2,7 +2,6 @@
 
 This is my personal Neovim configuration. It is a fork of [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
 
-[!warning]
 This is a **personal** configuration. It is not meant to be a general-purpose configuration. It is tailored to my needs and preferences. You are welcome to use it, but I make no guarantees that it will work for you. There are a lot of external dependencies, some of which I may not have documented here.
 
 ## Prerequisites
@@ -21,8 +20,8 @@ python3 -m venv .virtualenvs/neovim
 
 #### General
 
-[!important]
-Some plugins require authentication for use (e.g., Github Copilot). You will need to set up the necessary credentials for these plugins to work.
+> [!important]
+> Some plugins require authentication for use (e.g., Github Copilot). You will need to set up the necessary credentials for these plugins to work.
 
 Some of my plugins aren't functional, even on my machines; I'm keeping them around for when I configure them properly.
 

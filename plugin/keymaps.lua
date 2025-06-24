@@ -1,14 +1,16 @@
 --  See `:help set()`
 local set = vim.keymap.set
 local k = vim.keycode
-local f = require 'dylen.f'
-local fn = f.fn
+
+-- [[ Why do I need these?! (╯°□°）╯︵ ┻━┻ ]]
+--   Unmap s so it doesn't enter insert mode while i finish my mini surround motions/edits
+set('n', 's', '<Nop>')
+--   Unmap space so it doesn't do weird shit while I remember my keybinds (lets me see whick-key interface)
+set('n', '<space>', '<Nop>')
 
 -- [[ Navigation ]]
 -- Session ending quality of life keybinds.
-set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[Q]uit current buffer' })
 set('n', '<leader>Q', '<cmd>qall<CR>', { desc = '[Q]uit all buffers' })
-
 
 -- Keybinds to make navigation with multilevel bodies of text that only
 -- consume one line easier.
@@ -76,13 +78,8 @@ set('n', '<CR>', function()
 end, { expr = true })
 
 -- Diagnostics
-set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Show diagnostic [E]rror messages' })
 -- set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- There are builtin keymaps for this now, but I like that it shows
--- the float when I navigate to the error - so I override them.
-set('n', ']d', fn(vim.diagnostic.jump, { count = 1, float = true, desc = 'Go to previous [D]iagnostic message' }))
-set('n', '[d', fn(vim.diagnostic.jump, { count = -1, float = true, desc = 'Go to previous [D]iagnostic message' }))
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <c-\><c-n>, which
@@ -125,21 +122,29 @@ end)
 -- Persistence
 --
 -- load the session for the current directory
-set('n', '<leader>qs', function() require('persistence').load() end)
+set('n', '<leader>qs', function()
+  require('persistence').load()
+end)
 
 -- select a session to load
-set('n', '<leader>qS', function() require('persistence').select() end)
+set('n', '<leader>qS', function()
+  require('persistence').select()
+end)
 
 -- load the last session
-set('n', '<leader>ql', function() require('persistence').load({ last = true }) end)
+set('n', '<leader>ql', function()
+  require('persistence').load { last = true }
+end)
 
 -- stop Persistence => session won't be saved on exit
-set('n', '<leader>qd', function() require('persistence').stop() end)
+set('n', '<leader>qd', function()
+  require('persistence').stop()
+end)
 
 -- CodeSnap
 --
 -- save the selected visual block
-set({'v', 'x'}, '<leader>css', function() require('codesnap').save_snapshot() end)
+-- set({'v', 'x'}, '<leader>css', function() require('codesnap').save_snapshot() end)
 
 -- Rust tools
 --
@@ -147,4 +152,3 @@ set({'v', 'x'}, '<leader>css', function() require('codesnap').save_snapshot() en
 -- vim.keymap.set('n', '<C-space>', require('rust-tools').hover_actions.hover_actions)
 -- Code action groups
 -- vim.keymap.set('n', '<Leader>a', require('rust-tools').code_action_group.code_action_group)
-

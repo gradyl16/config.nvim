@@ -11,7 +11,7 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add language-specific debugging plugins below
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
   },
   config = function()
     local dap = require 'dap'
@@ -29,8 +29,7 @@ return {
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
+        'python',
       },
     }
 
@@ -45,28 +44,6 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
 
-    -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
-    }
-
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
@@ -74,71 +51,34 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
-      },
-    }
-
-    -- Install TS/JS specific config
-    -- setup adapters
-    dap.adapters['pwa-node'] = {
-      type = 'server',
-      host = 'localhost',
-      port = '${port}',
-      executable = {
-        command = 'node',
-        args = { vim.fn.stdpath 'data' .. '/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js', '${port}' },
-      },
-    }
-
-    -- custom adapter for running tasks before starting debug
-    local custom_adapter = 'pwa-node-custom'
-    dap.adapters[custom_adapter] = function(cb, config)
-      if config.preLaunchTask then
-        local async = require 'plenary.async'
-        local notify = require('notify').async
-
-        async.run(function()
-          ---@diagnostic disable-next-line: missing-parameter
-          notify('Running [' .. config.preLaunchTask .. ']').events.close()
-        end, function()
-          vim.fn.system(config.preLaunchTask)
-          config.type = 'pwa-node'
-          dap.run(config)
-        end)
-      end
-    end
-
     -- language config
-    dap.configurations.python = {
-      {
-        type = 'python',
-        request = 'launch',
-        name = 'Launch with CWD-relative args',
-        program = '${file}',
-        args = function()
-          local cwd = vim.fn.getcwd()
-          local input = vim.fn.input 'Args (relative to CWD): '
-          local parts = vim.fn.split(input, ' ', true)
-
-          -- Prepend CWD to any relative path arguments
-          local full_args = {}
-          for _, part in ipairs(parts) do
-            if vim.fn.filereadable(part) == 1 or vim.fn.isdirectory(part) == 1 then
-              table.insert(full_args, cwd .. '/' .. part)
-            else
-              table.insert(full_args, part)
-            end
-          end
-
-          return full_args
-        end,
-        console = 'integratedTerminal',
-      },
-    }
+    -- There is probably an existing debug adapter that works.
+    --
+    -- dap.configurations.python = {
+    --   {
+    --     type = 'python',
+    --     request = 'launch',
+    --     name = 'Launch with CWD-relative args',
+    --     program = '${file}',
+    --     args = function()
+    --       local cwd = vim.fn.getcwd()
+    --       local input = vim.fn.input 'Args (relative to CWD): '
+    --       local parts = vim.fn.split(input, ' ', true)
+    --
+    --       -- Prepend CWD to any relative path arguments
+    --       local full_args = {}
+    --       for _, part in ipairs(parts) do
+    --         if vim.fn.filereadable(part) == 1 or vim.fn.isdirectory(part) == 1 then
+    --           table.insert(full_args, cwd .. '/' .. part)
+    --         else
+    --           table.insert(full_args, part)
+    --         end
+    --       end
+    --
+    --       return full_args
+    --     end,
+    --     console = 'integratedTerminal',
+    --   },
+    -- }
   end,
 }

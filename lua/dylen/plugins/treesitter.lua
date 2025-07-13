@@ -9,9 +9,11 @@ return {
     branch = 'main',
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-      require('nvim-treesitter').install {
+      --
+      local languages = {
         'sh',
+        'html',
+        'css',
         'lua',
         'javascript',
         'typescript',
@@ -22,13 +24,16 @@ return {
         'markdown',
         'markdown_inline',
         'latex',
+        'python',
         'rust',
         'c',
       }
 
+      require('nvim-treesitter').install(languages)
+
       -- Start Treesitter automatically
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'sh', 'lua', 'javascript', 'typescript', 'jsx', 'tsx', 'vue', 'astro', 'markdown', 'markdown_inline', 'latex', 'rust', 'c' },
+        pattern = languages,
         callback = function()
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()

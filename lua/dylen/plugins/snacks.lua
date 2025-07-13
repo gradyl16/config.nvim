@@ -39,6 +39,13 @@ return {
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
+      image = {
+        enabled = true ,
+        doc = {
+          enabled = true,
+          inline = true,
+        },
+      },
       notifier = {
         enabled = true,
         timeout = 3000,

@@ -145,8 +145,25 @@ return {
           format = { enable = true },
         },
         gopls = {},
-        pyright = {},
-        rust_analyzer = {},
+        pylsp = {},
+        rust_analyzer = {
+          ['rust-analyzer'] = {
+            checkOnSave = {
+              command = 'clippy',
+            },
+            rustfmt = {
+              overrideCommand = { 'leptosfmt', '--stdin', '--rustfmt' },
+            },
+            procMacro = {
+              ignored = {
+                leptos_macro = {
+                  'component',
+                  'server',
+                },
+              },
+            },
+          },
+        },
         vtsls = {
           init_options = {
             plugins = {

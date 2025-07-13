@@ -4,15 +4,15 @@ local opt = vim.opt
 -- [[ Setting options ]]
 --  For more options, you can see `:help option-list`
 
+-- Disable the mouse
+opt.mouse = ''
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = true
 
 -- Line numbers (with offsets) as default
 opt.number = true
 opt.relativenumber = true
-
--- Enable mouse mode, can be useful for resizing splits for example!
-opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 opt.showmode = false

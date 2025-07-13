@@ -12,9 +12,6 @@ return {
       local harpoon = require 'harpoon'
       harpoon:setup {}
 
-      -- Harpoon group prefix (usually for which-key or similar)
-      -- If you use which-key you can register this group separately
-
       -- Add current file
       vim.keymap.set('n', '<leader>Ha', function()
         harpoon:list():add()
@@ -24,11 +21,6 @@ return {
       vim.keymap.set('n', '<leader>Hd', function()
         harpoon:list():remove()
       end, { desc = '[H]arpoon [d]elete current file' })
-
-      -- Quick pick 1
-      vim.keymap.set('n', '<C-t>', function()
-        harpoon:list():select(1)
-      end, { desc = 'Harpoon toggle quick pick 1' })
 
       -- Previous buffer in Harpoon list
       vim.keymap.set('n', '<C-p>', function()

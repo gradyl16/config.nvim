@@ -40,7 +40,7 @@ return {
       indent = { enabled = true },
       input = { enabled = true },
       image = {
-        enabled = true ,
+        enabled = true,
         doc = {
           enabled = true,
           inline = true,
@@ -50,7 +50,13 @@ return {
         enabled = true,
         timeout = 3000,
       },
-      picker = { enabled = true },
+      picker = {
+        sources = {
+          files = { hidden = true },
+          grep = { hidden = true },
+          explorer = { hidden = true },
+        },
+      },
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },

@@ -5,8 +5,8 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    'rcarriga/nvim-dap-ui', -- Creates a beautiful debugger UI
-    'nvim-neotest/nvim-nio', -- Required dependency for nvim-dap-ui
+    'rcarriga/nvim-dap-ui',    -- Creates a beautiful debugger UI
+    'nvim-neotest/nvim-nio',   -- Required dependency for nvim-dap-ui
     'williamboman/mason.nvim', -- Installs the debug adapters for you
     'jay-babu/mason-nvim-dap.nvim',
 
@@ -20,7 +20,7 @@ return {
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
-      automatic_installation = true,
+      -- automatic_installation = true,
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
@@ -29,7 +29,7 @@ return {
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
-        'python',
+        -- 'python',
       },
     }
 

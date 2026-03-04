@@ -145,7 +145,7 @@ return {
           format = { enable = true },
         },
         gopls = {},
-        pylsp = {},
+        jedi_language_server = {},
         rust_analyzer = {
           ['rust-analyzer'] = {
             checkOnSave = {

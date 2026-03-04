@@ -17,6 +17,7 @@ return {
         'lua',
         'javascript',
         'typescript',
+        'java',
         'jsx',
         'tsx',
         'vue',

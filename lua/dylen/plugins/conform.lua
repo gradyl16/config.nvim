@@ -38,6 +38,7 @@ return {
         rust = { 'rustfmt' },
         tex = { 'tex-fmt' },
         python = { 'isort', 'black' },
+        sh = {'shfmt'}
       },
       linters_by_ft = {
         markdown = { 'markdownlint' },

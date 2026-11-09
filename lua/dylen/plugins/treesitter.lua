@@ -11,7 +11,6 @@ return {
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       --
       local languages = {
-        'sh',
         'html',
         'css',
         'lua',
